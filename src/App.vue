@@ -1,28 +1,48 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <nav-component></nav-component>
+
+    <router-view />
+   <footer-component/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import navComponent from "./layout/navComponent.vue";
+import footerComponent from "./layout/footerComponent.vue";
+
 
 export default {
-  name: 'App',
+  name: "App",
+
   components: {
-    HelloWorld
-  }
-}
+    "nav-component": navComponent,
+    footerComponent
+  },
+};
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style scoped>
+
+@import "./assets/css/style.css";
+
+@import "./assets/css/open-iconic-bootstrap.min.css";
+@import "./assets/css/animate.css";
+
+ /* @import "./assets/css/owl.carousel.min.css";
+@import "./assets/css/owl.theme.default.min.css";  */
+@import "./assets/css/magnific-popup.css";
+
+@import "./assets/css/aos.css";
+
+@import "./assets/css/ionicons.min.css";
+
+@import "./assets/css/bootstrap-datepicker.css";
+@import "./assets/css/jquery.timepicker.css";
+
+@import "./assets/css/flaticon.css";
+@import "./assets/css/icomoon.css";
+@import "./assets/css/style.css";
+
+
 </style>
