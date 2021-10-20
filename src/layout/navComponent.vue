@@ -2,7 +2,7 @@
   <div>
     <div class="top">
       <div class="container">
-        <div class="row d-flex align-items-center">
+        <div class="row d-flex ">
           <div class="col">
             <p class="social d-flex">
               <a href="#"><span class="icon-facebook"></span></a>
@@ -13,7 +13,7 @@
           </div>
           <div class="col d-flex justify-content-end">
             <p class="num">
-              <span class="icon-phone"></span> + 1700 12345 6789
+              <span class="icon-phone"> {{ userdata.celular_movil }}</span>
             </p>
           </div>
         </div>
@@ -29,7 +29,15 @@
       id="ftco-navbar"
     >
       <div class="container">
-        <a class="navbar-brand" href="index.html">Royal<span>estate</span></a>
+        <router-link class="navbar-brand" :to="{ neme: 'home', params: { code: userdata.referral_code } }"
+          ><b-img
+            :src="url + configuracion.logo"
+            fluid
+            alt="Responsive image"
+            style="max-width: 9%"
+          ></b-img>
+          {{ configuracion.nombre }}</router-link
+        >
         <button
           class="navbar-toggler"
           type="button"
@@ -45,7 +53,9 @@
         <div class="collapse navbar-collapse" id="ftco-nav">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <router-link :to="{ name: 'home'}"  class="nav-link">Inicio</router-link>
+              <router-link :to="{ name: 'home' }" class="nav-link"
+                >Inicio</router-link
+              >
             </li>
             <!-- <li class="nav-item">
               <a href="property.html" class="nav-link">Property</a>
@@ -53,10 +63,11 @@
             <li class="nav-item">
               <a href="agents.html" class="nav-link">Agents</a>
             </li> -->
-            <li class="nav-item active">
-              <router-link :to="{ name: 'about'}"  class="nav-link">Acerca</router-link>
-
-            </li>
+            <!-- <li class="nav-item active">
+              <router-link :to="{ name: 'about' }" class="nav-link"
+                >Acerca</router-link
+              >
+            </li> -->
             <!-- <li class="nav-item">
               <a href="blog.html" class="nav-link">Blog</a>
             </li>
@@ -81,7 +92,29 @@
 </template>
 
 <script>
-export default {};
+import { BImg } from "bootstrap-vue";
+import { URL_LOCAL } from "../config.js";
+export default {
+  components: {
+    BImg,
+  },
+
+  data() {
+    return {
+      url: URL_LOCAL + "storage/",
+    };
+  },
+
+  computed: {
+    configuracion() {
+      return this.$store.state.home.configuracion;
+    },
+
+    userdata() {
+      return this.$store.state.home.userdata;
+    },
+  },
+};
 </script>
 
 <style>

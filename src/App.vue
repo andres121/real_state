@@ -1,9 +1,10 @@
 <template>
-  <div id="app">
+  <div id="app" style="background-color: #7367F0;">
+    
     <nav-component></nav-component>
 
     <router-view />
-   <footer-component/>
+    <footer-component />
   </div>
 </template>
 
@@ -11,25 +12,36 @@
 import navComponent from "./layout/navComponent.vue";
 import footerComponent from "./layout/footerComponent.vue";
 
-
 export default {
   name: "App",
 
   components: {
     "nav-component": navComponent,
-    footerComponent
+    footerComponent,
+  },
+
+  created() {
+    this.buscarInfo();
+  },
+
+  methods: {
+    buscarInfo() {
+      this.$store
+        .dispatch("home/getInmuebles", this.$route.params.code)
+        .then(() => {})
+        .catch(() => {});
+    },
   },
 };
 </script>
 
 <style scoped>
-
 @import "./assets/css/style.css";
 
 @import "./assets/css/open-iconic-bootstrap.min.css";
 @import "./assets/css/animate.css";
 
- /* @import "./assets/css/owl.carousel.min.css";
+/* @import "./assets/css/owl.carousel.min.css";
 @import "./assets/css/owl.theme.default.min.css";  */
 @import "./assets/css/magnific-popup.css";
 
@@ -43,6 +55,4 @@ export default {
 @import "./assets/css/flaticon.css";
 @import "./assets/css/icomoon.css";
 @import "./assets/css/style.css";
-
-
 </style>
