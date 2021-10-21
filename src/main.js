@@ -3,7 +3,8 @@ import App from './App.vue'
 import store from './store'
 import "./libs/axios";
 import router from './router'
-
+import VueCarousel from 'vue-carousel';
+Vue.use(VueCarousel);
 
 Vue.config.productionTip = false;
 

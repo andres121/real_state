@@ -2,7 +2,7 @@ import Vue from "vue";
 
 // axios
 import axios from "axios";
-
+import { URL_LOCAL } from '../config.js'
 const axiosIns = axios.create({
   // You can add your headers here
   // ====================== ==========
@@ -11,7 +11,7 @@ const axiosIns = axios.create({
   // baseURL: 'https://web.addy.la/',
 
   // baseURL: "https://app.addy.la/",
-  baseURL: "http://127.0.0.1:8000",
+  baseURL: URL_LOCAL,
   //setToken: localStorage.getItem("accessToken"),
   //timeout: 1000,
   headers: { "Contenct-type": "multipart/form-data" },

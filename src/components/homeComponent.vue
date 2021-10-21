@@ -1,8 +1,27 @@
 <template>
   <div>
-    <b-container fluid style="margin-top: 2%">
-      <b-row
-        >
+    <b-container fluid style="margin-top: 2%; border-radius: 2%">
+      <b-carousel
+      :interval="2000"
+        id="carousel-fade"
+        style="text-shadow: 0px 0px 2px #000"
+        fade
+        indicators
+      >
+        <b-carousel-slide
+          v-for="inm in inmuebles[0].inmueble_imagenes"
+          style="max-height: 500px"
+          :key="inm.id"
+        
+          :img-src="url + inm.url"
+        ></b-carousel-slide>
+      </b-carousel>
+    </b-container>
+    <b-container
+      fluid
+      style="margin-top: 2%; border-radius: 2%; max-width: 80%"
+    >
+      <b-row>
         <b-col v-for="inm in inmuebles" :key="inm.id">
           <div class="properties">
             <a
@@ -10,7 +29,7 @@
               class="img img-2 d-flex justify-content-center align-items-center"
               :style="{
                 backgroundImage:
-                  'url(http://127.0.0.1:8000/storage/' + inm.inmueble_imagenes[0].url +')',
+                  'url(' + url + inm.inmueble_imagenes[0].url + ')',
               }"
             >
               <div
@@ -20,19 +39,22 @@
               </div>
             </a>
             <div class="text p-3">
-              <span class="status rent">Venta</span>
+              <span class="status rent"></span>
               <div class="d-flex">
                 <div class="one">
-                  <h3><a href="#">{{ inm.titulo_inmueble}}</a></h3>
+                  <h3>
+                    <a href="#">{{ inm.titulo_inmueble }}</a>
+                  </h3>
                   <p>casa</p>
                 </div>
-               
-                  <span class="price"><strong>${{inm.precio_venta}}</strong> </span>
-              
+
+                <span class="price"
+                  ><strong>${{ inm.precio_venta }}</strong>
+                </span>
               </div>
-              <p v-html="inm.descripcion">
-                
-              </p>
+              <span style="white-space: pre-wrap">
+                <p v-html="inm.descripcion"></p>
+              </span>
               <hr />
               <p class="bottom-area d-flex">
                 <span><i class="flaticon-selection"></i> 250sqft</span>
@@ -48,12 +70,21 @@
 </template>
 
 <script>
-import { BContainer, BRow, BCol } from "bootstrap-vue";
+import {
+  BContainer,
+  BRow,
+  BCol,
+  BCarousel,
+  BCarouselSlide,
+} from "bootstrap-vue";
+import { URL_LOCAL } from "../config.js";
+
 export default {
   name: "homeComponent",
   data() {
     return {
       msg: "Welcome to Your Vue.js App",
+      url: URL_LOCAL + "storage/",
     };
   },
 
@@ -61,29 +92,14 @@ export default {
     BContainer,
     BRow,
     BCol,
+
+    BCarousel,
+    BCarouselSlide,
   },
 
   computed: {
     inmuebles() {
       return this.$store.state.home.inmuebles;
-    },
-  },
-
-  created() {
-    this.buscarInfo();
-  },
-
-  methods: {
-    buscarInfo() {
-    
-      this.$store
-        .dispatch("home/getInmuebles", this.$route.params.code)
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
     },
   },
 };
