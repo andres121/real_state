@@ -1,18 +1,18 @@
 <template>
   <div>
     <!-- banner -->
-    <div class="inside-banner">
+    <!-- <div class="inside-banner">
       <div class="container">
         <span class="pull-right"><a href="#">Home</a> / Buy</span>
         <h2>Buy</h2>
       </div>
-    </div>
+    </div> -->
     <!-- banner -->
-
-    <div class="container">
-      <div class="properties-listing spacer">
-        <div class="row">
-          <div class="col-lg-3 col-sm-4 hidden-xs">
+    <b-card>
+      <div class="container mt-3">
+        <div class="properties-listing spacer">
+          <div class="row">
+            <!-- <div class="col-lg-3 col-sm-4 hidden-xs">
             <div class="hot-properties hidden-xs">
               <h4>Hot Properties</h4>
               <div class="row">
@@ -87,125 +87,66 @@
                 alt="advertisement"
               />
             </div>
-          </div>
+          </div> -->
 
-          <div class="col-lg-9 col-sm-8 ">
-            <h2>2 room and 1 kitchen apartment</h2>
-            <div class="row">
-              <div class="col-lg-8">
-                <div class="property-images">
-                  <!-- Slider Starts -->
-                  <div
-                    id="myCarousel"
-                    class="carousel slide"
-                    data-ride="carousel"
-                  >
-                    <!-- Indicators -->
-                    <ol class="carousel-indicators hidden-xs">
-                      <li
-                        data-target="#myCarousel"
-                        data-slide-to="0"
-                        class="active"
-                      ></li>
-                      <li
-                        data-target="#myCarousel"
-                        data-slide-to="1"
-                        class=""
-                      ></li>
-                      <li
-                        data-target="#myCarousel"
-                        data-slide-to="2"
-                        class=""
-                      ></li>
-                      <li
-                        data-target="#myCarousel"
-                        data-slide-to="3"
-                        class=""
-                      ></li>
-                    </ol>
-                    <div class="carousel-inner">
-                      <!-- Item 1 -->
-                      <div class="item active">
-                        <img
-                          src="images/properties/4.jpg"
-                          class="properties"
-                          alt="properties"
-                        />
-                      </div>
-                      <!-- #Item 1 -->
+            <div class="col-lg-9 col-sm-8">
+              <!-- <h2> {{ inmueble.titulo_inmueble}} </h2> -->
+              <div class="row">
+                <div class="col-lg-8">
+                  <div class="property-images">
+                    <!-- Slider Starts -->
+                    <b-carousel
+                      id="carousel-1"
+                      v-model="slide"
+                      :interval="4000"
+                      controls
+                      indicators
+                      background="#ababab"
+                      img-width="1024"
+                      img-height="480"
+                      style="text-shadow: 1px 1px 2px #333"
+                      @sliding-start="onSlideStart"
+                      @sliding-end="onSlideEnd"
+                    >
+                      <!-- Text slides with image -->
 
-                      <!-- Item 2 -->
-                      <div class="item">
-                        <img
-                          src="images/properties/2.jpg"
-                          class="properties"
-                          alt="properties"
-                        />
-                      </div>
-                      <!-- #Item 2 -->
+                      <!-- Slides with img slot -->
+                      <!-- Note the classes .d-block and .img-fluid to prevent browser default image alignment -->
+                      <b-carousel-slide
+                        style="max-height: 500px"
+                        v-for="inm in inmueble.inmueble_imagenes"
+                        :key="inm.id"
+                      >
+                        <template #img>
+                          <img
+                            class="d-block img-fluid w-100"
+                            width="1024"
+                            height="480"
+                            :src="url + inm.url"
+                            alt="image slot"
+                          />
+                        </template>
+                      </b-carousel-slide>
 
-                      <!-- Item 3 -->
-                      <div class="item">
-                        <img
-                          src="images/properties/1.jpg"
-                          class="properties"
-                          alt="properties"
-                        />
-                      </div>
-                      <!-- #Item 3 -->
-
-                      <!-- Item 4 -->
-                      <div class="item ">
-                        <img
-                          src="images/properties/3.jpg"
-                          class="properties"
-                          alt="properties"
-                        />
-                      </div>
-                      <!-- # Item 4 -->
-                    </div>
-                    <a
-                      class="left carousel-control"
-                      href="#myCarousel"
-                      data-slide="prev"
-                      ><span class="glyphicon glyphicon-chevron-left"></span
-                    ></a>
-                    <a
-                      class="right carousel-control"
-                      href="#myCarousel"
-                      data-slide="next"
-                      ><span class="glyphicon glyphicon-chevron-right"></span
-                    ></a>
+                      <!-- Slide with blank fluid image to maintain slide aspect ratio -->
+                    </b-carousel>
+                    <!-- #Slider Ends -->
                   </div>
-                  <!-- #Slider Ends -->
-                </div>
 
-                <div class="spacer">
-                  <h4>
-                    <span class="glyphicon glyphicon-th-list"></span> Properties
-                    Detail
-                  </h4>
-                  <p>
-                    Efficiently unleash cross-media information without
-                    cross-media value. Quickly maximize timely deliverables for
-                    real-time schemas. Dramatically maintain clicks-and-mortar
-                    solutions without functional solutions.
-                  </p>
-                  <p>
-                    Completely synergize resource sucking relationships via
-                    premier niche markets. Professionally cultivate one-to-one
-                    customer service with robust ideas. Dynamically innovate
-                    resource-leveling customer service for state of the art
-                    customer service
-                  </p>
-                </div>
-                <div>
-                  <h4>
+                  <div class="spacer">
+                    <h4>
+                      <span class="glyphicon glyphicon-th-list"></span>
+                      {{ inmueble.titulo_inmueble }}
+                    </h4>
+                    <p v-html="inmueble.descripcion"></p>
+                  </div>
+                  <div>
+                    <!-- <h4>
                     <span class="glyphicon glyphicon-map-marker"></span>
                     Location
-                  </h4>
-                  <div class="well">
-                    <iframe
+                  </h4> -->
+                    <div class="well">
+                      <!-- <iframe
                       width="100%"
                       height="350"
                       frameborder="0"
@@ -213,57 +154,57 @@
                       marginheight="0"
                       marginwidth="0"
                       src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Pulchowk,+Patan,+Central+Region,+Nepal&amp;aq=0&amp;oq=pulch&amp;sll=37.0625,-95.677068&amp;sspn=39.371738,86.572266&amp;ie=UTF8&amp;hq=&amp;hnear=Pulchowk,+Patan+Dhoka,+Patan,+Bagmati,+Central+Region,+Nepal&amp;ll=27.678236,85.316853&amp;spn=0.001347,0.002642&amp;t=m&amp;z=14&amp;output=embed"
-                    ></iframe>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-4">
-                <div class="col-lg-12  col-sm-6">
-                  <div class="property-info">
-                    <p class="price">$ 200,000,000</p>
-                    <p class="area">
-                      <span class="glyphicon glyphicon-map-marker"></span> 344
-                      Villa, Syndey, Australia
-                    </p>
-
-                    <div class="profile">
-                      <span class="glyphicon glyphicon-user"></span> Agent
-                      Details
-                      <p>John Parker<br />009 229 2929</p>
+                    ></iframe> -->
                     </div>
                   </div>
-
-                  <h6>
-                    <span class="glyphicon glyphicon-home"></span> Availabilty
-                  </h6>
-                  <div class="listing-detail">
-                    <span
-                      data-toggle="tooltip"
-                      data-placement="bottom"
-                      data-original-title="Bed Room"
-                      >5</span
-                    >
-                    <span
-                      data-toggle="tooltip"
-                      data-placement="bottom"
-                      data-original-title="Living Room"
-                      >2</span
-                    >
-                    <span
-                      data-toggle="tooltip"
-                      data-placement="bottom"
-                      data-original-title="Parking"
-                      >2</span
-                    >
-                    <span
-                      data-toggle="tooltip"
-                      data-placement="bottom"
-                      data-original-title="Kitchen"
-                      >1</span
-                    >
-                  </div>
                 </div>
-                <div class="col-lg-12 col-sm-6 ">
+                <div class="col-lg-4">
+                  <div class="col-lg-12 col-sm-6">
+                    <div class="property-info">
+                      <p class="price-1">$ {{ inmueble.precio_venta }}</p>
+                      <p class="area">
+                        <span class="glyphicon glyphicon-map-marker"></span>
+                        <strong> {{ inmueble.direccion }}</strong>
+                      </p>
+
+                      <div class="profile">
+                        <span class="glyphicon glyphicon-user"></span>
+                        {{ userdata.primer_nombre }}
+                     
+                      </div>
+                    </div>
+                          <p>  Celular: {{ userdata.celular_movil }}</p>
+                    <!-- <h6>
+                      <span class="glyphicon glyphicon-home"></span> Availabilty
+                    </h6>
+                    <div class="listing-detail">
+                      <span
+                        data-toggle="tooltip"
+                        data-placement="bottom"
+                        data-original-title="Bed Room"
+                        >5</span
+                      >
+                      <span
+                        data-toggle="tooltip"
+                        data-placement="bottom"
+                        data-original-title="Living Room"
+                        >2</span
+                      >
+                      <span
+                        data-toggle="tooltip"
+                        data-placement="bottom"
+                        data-original-title="Parking"
+                        >2</span
+                      >
+                      <span
+                        data-toggle="tooltip"
+                        data-placement="bottom"
+                        data-original-title="Kitchen"
+                        >1</span
+                      >
+                    </div> -->
+                  </div>
+                  <!-- <div class="col-lg-12 col-sm-6">
                   <div class="enquiry">
                     <h6>
                       <span class="glyphicon glyphicon-envelope"></span> Post
@@ -299,18 +240,66 @@
                       </button>
                     </form>
                   </div>
+                </div> -->
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </b-card>
   </div>
 </template>
 
 <script>
-export default {};
+import { URL_LOCAL } from "../config.js";
+
+export default {
+  data() {
+    return {
+      slide: 0,
+      sliding: null,
+      url: URL_LOCAL + "storage/",
+      inmueble: {},
+    };
+  },
+
+  computed: {
+    userdata() {
+      return this.$store.state.home.userdata;
+    },
+  },
+
+  created() {
+    this.buscarInfo();
+  },
+
+  methods: {
+    onSlideStart(slide) {
+      this.sliding = true;
+    },
+
+    onSlideEnd(slide) {
+      this.sliding = false;
+    },
+
+    buscarInfo() {
+      this.$store
+        .dispatch("home/getInmueble", this.$route.params.id)
+        .then((res) => {
+          this.inmueble = res;
+        })
+        .catch(() => {});
+    },
+  },
+};
 </script>
 
-<style></style>
+<style>
+.price-1 {
+  font-size: 28px;
+  color: #72b70f;
+  padding: 0;
+  border-radius: 5px;
+}
+</style>

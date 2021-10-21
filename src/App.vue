@@ -1,33 +1,35 @@
 <template>
-  <div id="app" style="background-color: #fff;">
-    
+  <div id="app" style="background-color: #f7f7f7">
     <nav-component></nav-component>
 
     <router-view />
-    <footer-component />
+    <!-- <footer-component /> -->
   </div>
 </template>
 
 <script>
 import navComponent from "./layout/navComponent.vue";
-import footerComponent from "./layout/footerComponent.vue";
+// import footerComponent from "./layout/footerComponent.vue";
 
 export default {
   name: "App",
 
   components: {
     "nav-component": navComponent,
-    footerComponent,
+    // footerComponent,
   },
 
   created() {
+    localStorage.setItem("code", this.$route.params.code);
     this.buscarInfo();
   },
 
   methods: {
     buscarInfo() {
+      let code = localStorage.getItem("code", this.$route.params.code);
+     
       this.$store
-        .dispatch("home/getInmuebles", this.$route.params.code)
+        .dispatch("home/getInmuebles", code)
         .then(() => {})
         .catch(() => {});
     },

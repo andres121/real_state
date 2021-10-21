@@ -20,6 +20,8 @@ export default {
     GET_USERDATA(state, val) {
       state.userdata = val;
     },
+
+   
   },
 
   actions: {
@@ -40,6 +42,20 @@ export default {
           });
       });
     },
+
+    getInmueble(ctx, code ) {
+     
+      return new Promise((resolve, reject) => {
+        axios
+          .get("api/inmueble_id/" + code)
+          .then((response) => {
+            resolve(response.data.data.inmueble);
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      });
+    }
 
 
 

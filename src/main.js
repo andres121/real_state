@@ -3,9 +3,9 @@ import App from './App.vue'
 import store from './store'
 import "./libs/axios";
 import router from './router'
-import VueCarousel from 'vue-carousel';
-Vue.use(VueCarousel);
-
+import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue'
+Vue.use(BootstrapVue)
+Vue.use(BootstrapVueIcons)
 Vue.config.productionTip = false;
 
 new Vue({

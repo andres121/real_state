@@ -1,22 +1,25 @@
 import Vue from 'vue'
-import Router from 'vue-router'
+import VueRouter from 'vue-router'
 
 import homeComponent from '@/components/homeComponent'
 import aboutComponent from '@/components/aboutComponent'
 import detalleComponent from '@/components/detalleComponent'
 
-Vue.use(Router)
+Vue.use(VueRouter)
 
-export default new Router({
+export default new VueRouter({
+  scrollBehavior() {
+    return { x: 0, y: 0 }
+  },
   routes: [
     {
       path: '/:code',
-      name: 'home',
+      name: 'inicio',
       component: homeComponent
     },
 
     {
-      path: '/:code/details',
+      path: '/detalle/:id',
       name: 'detalle',
       component: detalleComponent
     },

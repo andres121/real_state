@@ -1,8 +1,11 @@
 <template>
   <div>
-    <b-container fluid style="margin-top: 2%; border-radius: 2%; max-width: 80%">
-      <b-carousel
-      :interval="2000"
+    <b-container
+      fluid
+      style="margin-top: 2%; border-radius: 2%; max-width: 80%"
+    >
+      <!-- <b-carousel
+        :interval="2000"
         id="carousel-fade"
         style="text-shadow: 0px 0px 2px #000"
         fade
@@ -12,10 +15,9 @@
           v-for="inm in inmuebles[0].inmueble_imagenes"
           style="max-height: 500px"
           :key="inm.id"
-        
           :img-src="url + inm.url"
         ></b-carousel-slide>
-      </b-carousel>
+      </b-carousel> -->
     </b-container>
     <b-container
       fluid
@@ -25,7 +27,10 @@
         <b-col v-for="inm in inmuebles" :key="inm.id">
           <div class="properties">
             <router-link
-             :to="{ name: 'detalle', params: { code: userdata.referral_code}}"
+              :to="{
+                name: 'detalle',
+                params: { code: userdata.referral_code, id: inm.id },
+              }"
               class="img img-2 d-flex justify-content-center align-items-center"
               :style="{
                 backgroundImage:
@@ -70,13 +75,7 @@
 </template>
 
 <script>
-import {
-  BContainer,
-  BRow,
-  BCol,
-  BCarousel,
-  BCarouselSlide,
-} from "bootstrap-vue";
+
 import { URL_LOCAL } from "../config.js";
 
 export default {
@@ -88,21 +87,13 @@ export default {
     };
   },
 
-  components: {
-    BContainer,
-    BRow,
-    BCol,
-
-    BCarousel,
-    BCarouselSlide,
-  },
 
   computed: {
     inmuebles() {
       return this.$store.state.home.inmuebles;
     },
 
-     userdata() {
+    userdata() {
       return this.$store.state.home.userdata;
     },
   },
