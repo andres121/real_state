@@ -1,5 +1,5 @@
 <template>
-  <div id="app" style="background-color: #7367F0;">
+  <div id="app" style="background-color: #fff;">
     
     <nav-component></nav-component>
 

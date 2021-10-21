@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-container fluid style="margin-top: 2%; border-radius: 2%">
+    <b-container fluid style="margin-top: 2%; border-radius: 2%; max-width: 80%">
       <b-carousel
       :interval="2000"
         id="carousel-fade"
@@ -19,13 +19,13 @@
     </b-container>
     <b-container
       fluid
-      style="margin-top: 2%; border-radius: 2%; max-width: 80%"
+      style="margin-top: 2%; border-radius: 2%; max-width: 90%"
     >
       <b-row>
         <b-col v-for="inm in inmuebles" :key="inm.id">
           <div class="properties">
-            <a
-              href="#"
+            <router-link
+             :to="{ name: 'detalle', params: { code: userdata.referral_code}}"
               class="img img-2 d-flex justify-content-center align-items-center"
               :style="{
                 backgroundImage:
@@ -37,9 +37,9 @@
               >
                 <span class="icon-search2"></span>
               </div>
-            </a>
+            </router-link>
             <div class="text p-3">
-              <span class="status rent"></span>
+              <span class="status rent">venta</span>
               <div class="d-flex">
                 <div class="one">
                   <h3>
@@ -100,6 +100,10 @@ export default {
   computed: {
     inmuebles() {
       return this.$store.state.home.inmuebles;
+    },
+
+     userdata() {
+      return this.$store.state.home.userdata;
     },
   },
 };
